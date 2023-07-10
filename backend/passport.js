@@ -14,6 +14,7 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, cb) {
       console.log("lll", profile);
+      //this is setting up the user in req.user
       cb(null, profile);
     }
   )
@@ -29,7 +30,7 @@ passport.use(
       profileFields: ["id", "displayName", "photos", "email"],
     },
     function (accessToken, refreshToken, profile, cb) {
-      // console.log("lll", profile);
+      // console.log("lllhhh", profile);
       cb(null, profile);
     }
   )

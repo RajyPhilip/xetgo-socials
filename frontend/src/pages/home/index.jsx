@@ -1,7 +1,8 @@
 import styles from "./style.module.css";
 
-function Home(userDetails) {
-  const user = userDetails.user;
+function Home({ userDetails, setUser }) {
+  const user = userDetails;
+  console.log("user", user);
   const logout = () => {
     window.open(`http://localhost:8080/logout`, "_self");
   };
@@ -16,7 +17,7 @@ function Home(userDetails) {
           <h2 className={styles.from_heading}>Profile</h2>
           <img
             className={styles.profile_img}
-            src={"user.picture"}
+            src={"userDetails.photos[0]"}
             alt="profile"
           />
 

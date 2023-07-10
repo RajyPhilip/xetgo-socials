@@ -8,14 +8,14 @@ import axios from "axios";
 
 function App() {
   const [user, setUser] = useState(null);
-
+  console.log("pppoooppperr userr", user);
   const getUser = async () => {
     try {
       const url = `http://localhost:8080/login/success`;
       console.log("url", url);
       const data = await axios.get(url, { withCredentials: true });
-      console.log("data", data.data.user);
-      setUser(data.user._json);
+      console.log("apppdaatta#", data.data.user);
+      setUser(data.data.user);
     } catch (error) {
       console.log("error##");
     }
@@ -26,9 +26,12 @@ function App() {
   }, []);
   return (
     <div className="container">
-      <h1>{user ? "user is present" : "user is not present"}</h1>
       <Routes>
-        <Route exact path="/home" element={<Home />} />
+        <Route
+          exact
+          path="/home"
+          element={<Home user={user} setUser={setUser} />}
+        />
         <Route
           exact
           path="/login"

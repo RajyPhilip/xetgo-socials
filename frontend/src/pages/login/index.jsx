@@ -4,19 +4,7 @@ import axios from "axios";
 function Login({ user, setUser }) {
   const googleAuth = async () => {
     console.log("ttt");
-    // window.open(`http://localhost:8080/auth/google/callback`, "_self");
-
-    let url = "http://localhost:8080/auth/google/callback";
-    const loginData = await axios.get(url, {
-      method: "GET",
-      mode: "no-cors",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    });
-    console.log("logindataa@@", loginData);
+    window.open(`http://localhost:8080/auth/google/callback`, "_self");
   };
   return (
     <div className={styles.container}>

@@ -43,12 +43,9 @@ router.get("/login/failed", (req, res) => {
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/",
+    successRedirect: "http://localhost:3000/home",
     failureRedirect: "/login/failed",
-  }),
-  (req, res) => {
-    console.log("is it working ");
-  }
+  })
 );
 router.get(
   "/google",
@@ -58,8 +55,12 @@ router.get(
 //logout
 router.get("/logout", (req, res) => {
   console.log("logout running");
-  req.logOut();
-  res.redirect("http://localhost:3000/");
+  req.logout(function (err) {
+    if (err) {
+      return console.log("error", err);
+    }
+    return res.redirect("http://localhost:3000/login");
+  });
 });
 
 // facebook routes
