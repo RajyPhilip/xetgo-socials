@@ -5,44 +5,18 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import axios from "axios";
+import { AuthContextProvider } from "./context/authContext";
 
 function App() {
-  const [user, setUser] = useState(null);
-  console.log("pppoooppperr userr", user);
-  const getUser = async () => {
-    try {
-      const url = `http://localhost:8080/login/success`;
-      console.log("url", url);
-      const data = await axios.get(url, { withCredentials: true });
-      console.log("apppdaatta#", data.data.user);
-      setUser(data.data.user);
-    } catch (error) {
-      console.log("error##");
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
   return (
     <div className="container">
-      <Routes>
-        <Route
-          exact
-          path="/home"
-          element={<Home user={user} setUser={setUser} />}
-        />
-        <Route
-          exact
-          path="/login"
-          element={user ? <Home /> : <Login user={user} setUser={setUser} />}
-        />
-        <Route
-          exact
-          path="/signup"
-          element={user ? <Navigate to="/login" /> : <Signup />}
-        />
-      </Routes>
+      <AuthContextProvider>
+        <Routes>
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<Signup />} />
+        </Routes>
+      </AuthContextProvider>
     </div>
   );
 }

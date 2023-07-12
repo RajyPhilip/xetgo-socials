@@ -1,14 +1,22 @@
+import { UserAuth } from "../../context/authContext";
 import styles from "./style.module.css";
 
-function Home({ userDetails, setUser }) {
-  const user = userDetails;
-  console.log("user", user);
-  const logout = () => {
-    window.open(`http://localhost:8080/logout`, "_self");
+function Home() {
+  const { user1, logOut } = UserAuth();
+
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.log("error logging out", error);
+    }
   };
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>I m HomePage</h1>
+      <h1 className={styles.heading}>
+        I m HomePage {user1 && user1.displayName}
+      </h1>
       <div className={styles.form_container}>
         <div className={styles.left}>
           <img className={styles.img} src="./images/login.jpg" alt="profile" />
@@ -33,7 +41,7 @@ function Home({ userDetails, setUser }) {
             className={styles.input}
             placeholder="Email"
           />
-          <button onClick={logout} className={styles.btn}>
+          <button onClick={handleSignOut} className={styles.btn}>
             Logout
           </button>
         </div>
